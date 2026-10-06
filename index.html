@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sky Events & SFx | Event Special Effects & Bookings</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Styling -->
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <!-- Toast Notification -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Header Navigation -->
+  <header class="app-header">
+    <div class="header-container">
+      <a href="#home" class="logo">
+        <span class="logo-accent">SKY</span> EVENTS & SFX
+      </a>
+      
+      <button class="mobile-nav-toggle" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      
+      <nav class="nav-menu">
+        <a href="#home" class="nav-link active" data-route="home">Home</a>
+        <a href="#services" class="nav-link" data-route="services">Services</a>
+        <a href="#gallery" class="nav-link" data-route="gallery">Gallery</a>
+        <a href="#book" class="nav-link" data-route="book">Book Now</a>
+        <a href="#contact" class="nav-link" data-route="contact">Contact</a>
+        <span class="nav-separator">|</span>
+        <a href="#login" class="nav-btn" id="nav-auth-btn" data-route="login">
+          <i class="fa-solid fa-user"></i> Login / Register
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main View Container -->
+  <main class="main-content">
+
+    <!-- HOME / LANDING VIEW -->
+    <section id="view-home" class="view-section active">
+      <!-- Hero Section -->
+      <div class="hero-banner">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <span class="hero-badge">Special Effects & Event Styling</span>
+          <h1 class="hero-title">SKY EVENTS AND SFX</h1>
+          <p class="hero-subtitle">An Online Event Booking & Special-Effects Service Management Platform</p>
+          <div class="hero-tagline">"Elegance in every explosion"</div>
+          <div class="hero-actions">
+            <a href="#book" class="btn btn-primary btn-lg">Book Now</a>
+            <a href="#services" class="btn btn-outline btn-lg">Explore Services</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Brief Service Intro -->
+      <div class="home-services-intro container">
+        <div class="section-header">
+          <h2>Premium Special Effects</h2>
+          <p>Bring high-end production value to your weddings, product launches, corporate galas, and parties.</p>
+        </div>
+        
+        <div class="services-teaser-grid" id="services-teaser-list">
+          <!-- Dynamically populated teaser services -->
+        </div>
+        
+        <div class="text-center mt-4">
+          <a href="#services" class="btn btn-secondary">View All Services <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Testimonials Summary Section -->
+      <div class="home-testimonials-section">
+        <div class="container">
+          <div class="section-header">
+            <h2>What Our Clients Say</h2>
+            <p>Real experiences from our customers who trusted us with their special moments.</p>
+          </div>
+          <div class="testimonials-slider-container" id="public-testimonials-grid">
+            <!-- Dynamically populated testimonials -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICE CATALOGUE VIEW -->
+    <section id="view-services" class="view-section">
+      <div class="container py-5">
+        <div class="section-header">
+          <h1>Our Service Catalogue</h1>
+          <p>Browse through our standard event coordination, entrance designs, and explosive special effects.</p>
+        </div>
+
+        <div class="services-filter-bar">
+          <button class="filter-btn active" data-category="all">All Services</button>
+          <button class="filter-btn" data-category="Entrance">Entrances</button>
+          <button class="filter-btn" data-category="Effects">Special Effects</button>
+          <button class="filter-btn" data-category="Decoration">Decorations</button>
+        </div>
+
+        <div class="services-grid" id="services-catalogue-list">
+          <!-- Dynamically populated complete services list -->
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY VIEW -->
+    <section id="view-gallery" class="view-section">
+      <div class="container py-5">
+        <div class="section-header">
+          <h1>Event Gallery</h1>
+          <p>Real-life highlights and memories from weddings, corporate setups, and stage shows.</p>
+        </div>
+
+        <div class="gallery-filter-bar">
+          <button class="gallery-filter-btn active" data-gallery-cat="all">All Photos</button>
+          <button class="gallery-filter-btn" data-gallery-cat="Entrance">Entrances</button>
+          <button class="gallery-filter-btn" data-gallery-cat="Effects">Effects</button>
+          <button class="gallery-filter-btn" data-gallery-cat="Decoration">Decorations</button>
+        </div>
+
+        <div class="gallery-grid" id="gallery-photos-grid">
+          <!-- Dynamically populated event photos -->
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOK NOW VIEW -->
+    <section id="view-book" class="view-section">
+      <div class="container py-5">
+        <div class="booking-card">
+          <div class="booking-header">
+            <h1>Book a Service</h1>
+            <p>Fill in your event details and our team will confirm availability.</p>
+          </div>
+          
+          <!-- Booking Login Alert if guest -->
+          <div id="booking-login-alert" class="booking-alert warning">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>You must be <a href="#login" class="alert-link">Registered & Logged In</a> to submit a booking request.</span>
+          </div>
+
+          <form id="booking-request-form" class="booking-form" novalidate>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="booking-fullname">Full Name *</label>
+                <input type="text" id="booking-fullname" name="name" placeholder="Enter your full name" required>
+                <div class="error-msg" id="err-booking-fullname"></div>
+              </div>
+              
+              <div class="form-group">
+                <label for="booking-phone">Phone Number *</label>
+                <input type="tel" id="booking-phone" name="phone" placeholder="10-digit mobile number" required>
+                <div class="error-msg" id="err-booking-phone"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="booking-email">Email Address *</label>
+                <input type="email" id="booking-email" name="email" placeholder="email@example.com" required>
+                <div class="error-msg" id="err-booking-email"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="booking-eventtype">Event Type *</label>
+                <select id="booking-eventtype" name="eventType" required>
+                  <option value="" disabled selected>Select event type</option>
+                  <option value="Wedding Reception">Wedding Reception</option>
+                  <option value="Bride & Groom Entry">Bride & Groom Entry</option>
+                  <option value="Birthday Party">Birthday Party</option>
+                  <option value="Corporate Launch">Corporate Launch</option>
+                  <option value="Anniversary">Anniversary</option>
+                  <option value="Welcome Decoration">Welcome Decoration</option>
+                  <option value="Other">Other Event</option>
+                </select>
+                <div class="error-msg" id="err-booking-eventtype"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="booking-date">Event Date *</label>
+                <input type="date" id="booking-date" name="eventDate" required>
+                <div class="error-msg" id="err-booking-date"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="booking-venue">Venue / Location *</label>
+                <input type="text" id="booking-venue" name="venue" placeholder="e.g. Grand Palazzo, Pune" required>
+                <div class="error-msg" id="err-booking-venue"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="booking-guestcount">Expected Guest Count</label>
+                <input type="number" id="booking-guestcount" name="guestCount" placeholder="e.g. 250" min="1">
+                <div class="error-msg" id="err-booking-guestcount"></div>
+              </div>
+
+              <div class="form-group">
+                <label>Select Required Services *</label>
+                <div class="services-checkbox-list" id="booking-services-selection">
+                  <!-- Dynamically populated list of checkable active services -->
+                </div>
+                <div class="error-msg" id="err-booking-services"></div>
+              </div>
+            </div>
+
+            <div class="form-group full-width mt-3">
+              <label for="booking-requirements">Message / Special Requirements</label>
+              <textarea id="booking-requirements" name="specialRequirements" rows="4" placeholder="Need indoor cold-pyro effect for stage entry, snow machine for first dance..."></textarea>
+            </div>
+
+            <div class="booking-price-estimator" id="booking-price-summary" style="display: none;">
+              <div class="price-row">
+                <span>Estimated Service Total:</span>
+                <span class="price-value" id="estimated-total-amount">Rs 0</span>
+              </div>
+              <div class="price-subtext">Estimated total. final quote and advance amount request will be sent upon review.</div>
+            </div>
+
+            <div class="form-actions mt-4">
+              <button type="submit" class="btn btn-primary btn-lg btn-block" id="btn-submit-booking">
+                <i class="fa-solid fa-paper-plane"></i> Submit Booking Request
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT / ENQUIRY VIEW -->
+    <section id="view-contact" class="view-section">
+      <div class="container py-5">
+        <div class="contact-layout">
+          <!-- Left side contact details -->
+          <div class="contact-info">
+            <h2>Get In Touch</h2>
+            <p>Have questions about custom packages, pricing, or safety logistics? Fill out the form or reach us via our standard channels.</p>
+            
+            <div class="info-list">
+              <div class="info-item">
+                <i class="fa-solid fa-phone"></i>
+                <div>
+                  <h4>Call Us</h4>
+                  <p>+91 9607097915</p>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <i class="fa-solid fa-envelope"></i>
+                <div>
+                  <h4>Email Support</h4>
+                  <p>skyevents59@gmail.com</p>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <i class="fa-brands fa-instagram"></i>
+                <div>
+                  <h4>Follow Us</h4>
+                  <a href="https://instagram.com/_sky.events_" target="_blank">@_sky.events_</a>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <div>
+                  <h4>Office Address</h4>
+                  <p>Narayan peth, Near Matiganpati Pune, Maharashtra - 411030</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right side enquiry form -->
+          <div class="contact-form-card">
+            <h2>Send an Enquiry</h2>
+            <p>Submit your inquiry below, and we will get back to you within 24 hours. (No registration required)</p>
+            
+            <form id="general-enquiry-form" novalidate>
+              <div class="form-group">
+                <label for="enquiry-name">Your Name *</label>
+                <input type="text" id="enquiry-name" name="name" placeholder="Enter your name" required>
+                <div class="error-msg" id="err-enquiry-name"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="enquiry-email">Email Address *</label>
+                <input type="email" id="enquiry-email" name="email" placeholder="yourname@gmail.com" required>
+                <div class="error-msg" id="err-enquiry-email"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="enquiry-phone">Phone Number *</label>
+                <input type="tel" id="enquiry-phone" name="phone" placeholder="10-digit mobile number" required>
+                <div class="error-msg" id="err-enquiry-phone"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="enquiry-message">Your Message *</label>
+                <textarea id="enquiry-message" name="message" rows="4" placeholder="How can we help you? Please describe your event details..." required></textarea>
+                <div class="error-msg" id="err-enquiry-message"></div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block" id="btn-submit-enquiry">
+                <i class="fa-solid fa-paper-plane"></i> Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AUTHENTICATION VIEW -->
+    <section id="view-login" class="view-section">
+      <div class="auth-container">
+        <div class="auth-tabs">
+          <button class="auth-tab-btn active" id="btn-tab-login" onclick="switchAuthTab('login')">Customer Login</button>
+          <button class="auth-tab-btn" id="btn-tab-register" onclick="switchAuthTab('register')">Register Account</button>
+          <button class="auth-tab-btn" id="btn-tab-admin" onclick="switchAuthTab('admin')">Admin Portal</button>
+        </div>
+
+        <!-- Customer Login Form -->
+        <div class="auth-card active" id="auth-login-card">
+          <h2>Customer Log In</h2>
+          <p>Access bookings details, track event approval, and submit testimonials.</p>
+          <form id="customer-login-form" novalidate>
+            <div class="form-group">
+              <label for="login-email">Email Address</label>
+              <input type="email" id="login-email" placeholder="rohan@gmail.com" required>
+              <div class="error-msg" id="err-login-email"></div>
+            </div>
+            <div class="form-group">
+              <label for="login-password">Password</label>
+              <input type="password" id="login-password" placeholder="••••••••" required>
+              <div class="error-msg" id="err-login-password"></div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Log In</button>
+          </form>
+          <div class="auth-subtext text-center mt-3">
+            Don't have an account? <a href="javascript:void(0)" onclick="switchAuthTab('register')">Register here</a>
+          </div>
+        </div>
+
+        <!-- Customer Registration Form -->
+        <div class="auth-card" id="auth-register-card">
+          <h2>Create Account</h2>
+          <p>Register as a client to unlock online service bookings.</p>
+          <form id="customer-register-form" novalidate>
+            <div class="form-group">
+              <label for="reg-name">Full Name *</label>
+              <input type="text" id="reg-name" placeholder="Rohan Deshmukh" required>
+              <div class="error-msg" id="err-reg-name"></div>
+            </div>
+            <div class="form-group">
+              <label for="reg-email">Email Address *</label>
+              <input type="email" id="reg-email" placeholder="rohan@gmail.com" required>
+              <div class="error-msg" id="err-reg-email"></div>
+            </div>
+            <div class="form-group">
+              <label for="reg-phone">Phone Number (10 digits) *</label>
+              <input type="tel" id="reg-phone" placeholder="9876543210" required>
+              <div class="error-msg" id="err-reg-phone"></div>
+            </div>
+            <div class="form-group">
+              <label for="reg-password">Password (min 8 chars) *</label>
+              <input type="password" id="reg-password" placeholder="••••••••" required>
+              <div class="error-msg" id="err-reg-password"></div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Register Account</button>
+          </form>
+          <div class="auth-subtext text-center mt-3">
+            Already registered? <a href="javascript:void(0)" onclick="switchAuthTab('login')">Login here</a>
+          </div>
+        </div>
+
+        <!-- Admin Login Form -->
+        <div class="auth-card" id="auth-admin-card">
+          <h2>Admin Login</h2>
+          <p>Access dashboard to manage bookings, services, and content moderation.</p>
+          <form id="admin-login-form" novalidate>
+            <div class="form-group">
+              <label for="admin-email">Admin Email</label>
+              <input type="email" id="admin-email" placeholder="admin@skyevents.in" required>
+              <div class="error-msg" id="err-admin-email"></div>
+            </div>
+            <div class="form-group">
+              <label for="admin-password">Admin Password</label>
+              <input type="password" id="admin-password" placeholder="••••••••" required>
+              <div class="error-msg" id="err-admin-password"></div>
+            </div>
+            <button type="submit" class="btn btn-accent btn-block">Secure Admin Log In</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- CUSTOMER DASHBOARD VIEW -->
+    <section id="view-dashboard" class="view-section">
+      <div class="container py-5">
+        <div class="dashboard-layout">
+          <!-- Profile Panel -->
+          <div class="dashboard-sidebar">
+            <div class="profile-card">
+              <div class="profile-avatar"><i class="fa-solid fa-user-tie"></i></div>
+              <h3 id="customer-profile-name">Loading...</h3>
+              <p id="customer-profile-email">Loading...</p>
+              <p id="customer-profile-phone">Loading...</p>
+              <hr class="my-3">
+              <button class="btn btn-outline btn-block text-danger" id="btn-customer-logout">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout Account
+              </button>
+            </div>
+          </div>
+
+          <!-- Bookings List -->
+          <div class="dashboard-main">
+            <div class="card-header-flex">
+              <h2>My Booking History</h2>
+              <a href="#book" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> New Booking</a>
+            </div>
+
+            <div class="bookings-table-container">
+              <table class="dashboard-table">
+                <thead>
+                  <tr>
+                    <th>Event Details</th>
+                    <th>Date & Venue</th>
+                    <th>Required Services</th>
+                    <th>Advance Est.</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="customer-bookings-list">
+                  <!-- Dynamically populated customer bookings -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADMIN DASHBOARD PANEL -->
+    <section id="view-admin" class="view-section">
+      <div class="admin-dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="admin-sidebar">
+          <div class="admin-sidebar-header">
+            <h3>Admin Console</h3>
+            <span id="admin-user-tag">admin@skyevents.in</span>
+          </div>
+          <nav class="admin-sidebar-menu">
+            <a href="javascript:void(0)" class="admin-side-link active" onclick="switchAdminTab('bookings')">
+              <i class="fa-solid fa-calendar-check"></i> Manage Bookings
+            </a>
+            <a href="javascript:void(0)" class="admin-side-link" onclick="switchAdminTab('services')">
+              <i class="fa-solid fa-fire"></i> Manage Services
+            </a>
+            <a href="javascript:void(0)" class="admin-side-link" onclick="switchAdminTab('gallery')">
+              <i class="fa-solid fa-images"></i> Manage Gallery
+            </a>
+            <a href="javascript:void(0)" class="admin-side-link" onclick="switchAdminTab('testimonials')">
+              <i class="fa-solid fa-comments"></i> Testimonials
+            </a>
+            <a href="javascript:void(0)" class="admin-side-link" onclick="switchAdminTab('enquiries')">
+              <i class="fa-solid fa-envelope-open-text"></i> Enquiries
+            </a>
+          </nav>
+          <div class="admin-sidebar-footer">
+            <button class="btn btn-outline btn-block text-danger" id="btn-admin-logout">
+              <i class="fa-solid fa-right-from-bracket"></i> Exit Admin
+            </button>
+          </div>
+        </aside>
+
+        <!-- Dynamic Admin Tabs Content -->
+        <main class="admin-content-area">
+          
+          <!-- TAB 1: MANAGE BOOKINGS -->
+          <div class="admin-tab-content active" id="admin-tab-bookings">
+            <div class="section-title-bar">
+              <h2>Bookings Control Center</h2>
+              <span class="record-count" id="admin-bookings-count">0 Bookings Total</span>
+            </div>
+            
+            <div class="table-card glass-panel">
+              <div class="table-responsive">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Customer</th>
+                      <th>Event Details</th>
+                      <th>Date & Venue</th>
+                      <th>Amount</th>
+                      <th>Status</th>
+                      <th>Update Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-bookings-list">
+                    <!-- Seeded and added bookings will show here -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 2: MANAGE SERVICES -->
+          <div class="admin-tab-content" id="admin-tab-services">
+            <div class="section-title-bar">
+              <h2>Service Directory & Catalog</h2>
+            </div>
+            
+            <div class="admin-split-layout">
+              <!-- Add Service Form -->
+              <div class="admin-form-panel glass-panel">
+                <h3>Add New Service</h3>
+                <form id="admin-add-service-form" novalidate>
+                  <div class="form-group">
+                    <label for="admin-srv-name">Service Name *</label>
+                    <input type="text" id="admin-srv-name" placeholder="e.g. Laser Light Canopy" required>
+                    <div class="error-msg" id="err-admin-srv-name"></div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="admin-srv-category">Category *</label>
+                    <select id="admin-srv-category" required>
+                      <option value="" disabled selected>Select category</option>
+                      <option value="Entrance">Entrance</option>
+                      <option value="Effects">Effects</option>
+                      <option value="Decoration">Decoration</option>
+                    </select>
+                    <div class="error-msg" id="err-admin-srv-category"></div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="admin-srv-price">Base Price (INR) *</label>
+                    <input type="number" id="admin-srv-price" placeholder="8500" required min="1">
+                    <div class="error-msg" id="err-admin-srv-price"></div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="admin-srv-desc">Short Description</label>
+                    <textarea id="admin-srv-desc" rows="3" placeholder="Describe the service details and constraints..."></textarea>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="admin-srv-image">Image Preset *</label>
+                    <select id="admin-srv-image" required>
+                      <option value="/assets/images/sfx_stage.png">Stage SFx / Pyrotechnics</option>
+                      <option value="/assets/images/wedding_entry.png">Bride & Groom Entrance</option>
+                      <option value="/assets/images/confetti_shower.png">Confetti / Celebration</option>
+                      <option value="/assets/images/dry_ice_dance.png">Dry Ice Floor Cloud</option>
+                      <option value="/assets/images/birthday_decoration.png">Birthday Theme Arch</option>
+                      <option value="/assets/images/welcome_decoration.png">Welcome Flower Styling</option>
+                    </select>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary btn-block">+ Add Service</button>
+                </form>
+              </div>
+
+              <!-- Services Listing -->
+              <div class="admin-list-panel glass-panel">
+                <h3>Current Services Catalogue</h3>
+                <div class="table-responsive mt-3">
+                  <table class="admin-table">
+                    <thead>
+                      <tr>
+                        <th>Service Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="admin-services-list">
+                      <!-- Render services list with toggle status -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 3: MANAGE GALLERY -->
+          <div class="admin-tab-content" id="admin-tab-gallery">
+            <div class="section-title-bar">
+              <h2>Gallery Highlights Management</h2>
+            </div>
+
+            <div class="admin-split-layout">
+              <!-- Upload Image Detail -->
+              <div class="admin-form-panel glass-panel">
+                <h3>Link Event Photo</h3>
+                <form id="admin-add-gallery-form" novalidate>
+                  <div class="form-group">
+                    <label for="admin-gal-caption">Caption / Label *</label>
+                    <input type="text" id="admin-gal-caption" placeholder="Snow Machine First Dance - Sunshine Banquets" required>
+                    <div class="error-msg" id="err-admin-gal-caption"></div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="admin-gal-category">Category *</label>
+                    <select id="admin-gal-category" required>
+                      <option value="" disabled selected>Select category</option>
+                      <option value="Entrance">Entrance</option>
+                      <option value="Effects">Effects</option>
+                      <option value="Decoration">Decoration</option>
+                    </select>
+                    <div class="error-msg" id="err-admin-gal-category"></div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="admin-gal-service">Link to Service (Optional)</label>
+                    <select id="admin-gal-service">
+                      <!-- Dynamically populated from active services -->
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="admin-gal-image">Select Preset Event Photo *</label>
+                    <select id="admin-gal-image" required>
+                      <option value="/assets/images/sfx_stage.png">Stage SFx / Pyrotechnics</option>
+                      <option value="/assets/images/wedding_entry.png">Bride & Groom Entrance</option>
+                      <option value="/assets/images/confetti_shower.png">Confetti / Celebration</option>
+                      <option value="/assets/images/dry_ice_dance.png">Dry Ice Floor Cloud</option>
+                      <option value="/assets/images/birthday_decoration.png">Birthday Theme Arch</option>
+                      <option value="/assets/images/welcome_decoration.png">Welcome Flower Styling</option>
+                    </select>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary btn-block">Add to Public Gallery</button>
+                </form>
+              </div>
+
+              <!-- Gallery Photos Listing -->
+              <div class="admin-list-panel glass-panel">
+                <h3>Gallery Photos List</h3>
+                <div class="gallery-management-grid" id="admin-gallery-list">
+                  <!-- Dynamically list images with remove buttons -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 4: TESTIMONIALS MODERATION -->
+          <div class="admin-tab-content" id="admin-tab-testimonials">
+            <div class="section-title-bar">
+              <h2>Client Feedback Moderation</h2>
+            </div>
+            
+            <div class="testimonials-moderation-container glass-panel">
+              <h3>Pending Customer Testimonials</h3>
+              <div class="testimonials-mod-list" id="admin-testimonials-pending-list">
+                <!-- Dynamically show testimonials waiting for approval -->
+              </div>
+              
+              <h3 class="mt-5">Approved Testimonials</h3>
+              <div class="testimonials-mod-list approved-list" id="admin-testimonials-approved-list">
+                <!-- List of approved reviews -->
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 5: ENQUIRIES HANDLER -->
+          <div class="admin-tab-content" id="admin-tab-enquiries">
+            <div class="section-title-bar">
+              <h2>General Client Enquiries</h2>
+            </div>
+            
+            <div class="enquiries-management-container glass-panel">
+              <div class="table-responsive">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Enquirer</th>
+                      <th>Contact Details</th>
+                      <th>Message Details</th>
+                      <th>Date Submitted</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-enquiries-list">
+                    <!-- Enquiries table -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- CUSTOMER TESTIMONIAL SUBMISSION MODAL -->
+  <div class="modal-backdrop" id="modal-testimonial-backdrop" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Submit Event Review</h3>
+          <button class="modal-close" onclick="closeTestimonialModal()">&times;</button>
+        </div>
+        <form id="customer-testimonial-form" novalidate>
+          <input type="hidden" id="modal-testimonial-booking-id">
+          <div class="modal-body">
+            <p>Tell us and other customers how we did for your event. Your feedback will be visible publicly once verified by our team.</p>
+            
+            <div class="form-group">
+              <label for="testimonial-rating">Rating (1-5 Stars) *</label>
+              <div class="rating-stars-input">
+                <input type="number" id="testimonial-rating" name="rating" min="1" max="5" value="5" required>
+                <span class="rating-instructions">Please enter an integer between 1 and 5.</span>
+              </div>
+              <div class="error-msg" id="err-testimonial-rating"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="testimonial-message">Feedback Message *</label>
+              <textarea id="testimonial-message" name="message" rows="4" placeholder="Your review text here..." required></textarea>
+              <div class="error-msg" id="err-testimonial-message"></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline" onclick="closeTestimonialModal()">Cancel</button>
+            <button type="submit" class="btn btn-primary">Submit Testimonial</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICE DETAILS DIALOG / MODAL -->
+  <div class="modal-backdrop" id="modal-service-backdrop" style="display: none;">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content service-detail-modal">
+        <div class="modal-header">
+          <h3 id="modal-srv-title">Service Details</h3>
+          <button class="modal-close" onclick="closeServiceModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <img src="" id="modal-srv-img" class="modal-service-banner" alt="Service Photo">
+          <div class="modal-srv-category-price">
+            <span class="badge" id="modal-srv-badge">Category</span>
+            <span class="modal-srv-price" id="modal-srv-cost">Rs 0</span>
+          </div>
+          <p class="modal-srv-description" id="modal-srv-description">Description goes here...</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" onclick="closeServiceModal()">Close</button>
+          <a href="#book" class="btn btn-primary" onclick="closeServiceModal(); selectServiceInForm()">Select & Book Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- App Footer -->
+  <footer class="app-footer">
+    <div class="container footer-content">
+      <p>&copy; 2026 Sky Events & SFx. All rights reserved.</p>
+      <p class="footer-tagline">"Elegance in every explosion" | IG: <a href="https://instagram.com/_sky.events_" target="_blank">@_sky.events_</a></p>
+    </div>
+  </footer>
+
+  <!-- App Main Javascript -->
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
